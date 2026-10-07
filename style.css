@@ -1,0 +1,1510 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap');
+
+/* =================================
+   RESET PRINCIPAL
+================================= */
+
+:root {
+    --cyan: #00e5ff;
+    --green: #0ccf7e;
+    --purple: #8a5cff;
+    --pink: #ee50d4;
+    --dark: #020511;
+    --panel: rgba(7, 20, 39, .78);
+    --text: #eafcff;
+    --muted: #9ab2c3;
+    --error: #ff5577;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background: #020511;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(0, 229, 255, .12),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(238, 80, 212, .1),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #020511,
+            #071426 50%,
+            #030713
+        );
+
+    font-family: "Roboto", sans-serif;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* =================================
+   FUNDO ANIMADO
+================================= */
+
+#spaceCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: -20;
+
+    width: 100vw;
+    height: 100vh;
+
+    pointer-events: none;
+}
+
+.ambient-glow {
+    position: fixed;
+    z-index: -15;
+
+    width: 420px;
+    height: 420px;
+
+    border-radius: 50%;
+
+    opacity: .24;
+    filter: blur(95px);
+
+    pointer-events: none;
+}
+
+.glow-one {
+    top: -160px;
+    left: -120px;
+    background: var(--cyan);
+}
+
+.glow-two {
+    right: -170px;
+    bottom: 5%;
+    background: var(--pink);
+}
+
+.glow-three {
+    top: 45%;
+    left: 38%;
+
+    width: 280px;
+    height: 280px;
+
+    opacity: .1;
+    background: var(--green);
+}
+
+.scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+
+    opacity: .1;
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 5px,
+            rgba(0, 229, 255, .2) 6px,
+            transparent 7px
+        );
+
+    mix-blend-mode: screen;
+    animation: scanMove 9s linear infinite;
+}
+
+.cyber-grid {
+    position: fixed;
+    left: -25%;
+    bottom: -35%;
+    z-index: -12;
+
+    width: 150%;
+    height: 75%;
+
+    transform:
+        perspective(500px)
+        rotateX(63deg);
+
+    transform-origin: center bottom;
+
+    opacity: .35;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 229, 255, .18) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0, 229, 255, .18) 1px,
+            transparent 1px
+        );
+
+    background-size: 55px 55px;
+
+    mask-image:
+        linear-gradient(
+            to top,
+            black,
+            transparent
+        );
+
+    animation: gridMove 7s linear infinite;
+}
+
+/* =================================
+   HEADER
+================================= */
+
+header {
+    position: relative;
+    z-index: 2;
+
+    min-height: 270px;
+    padding: 50px 20px 35px;
+
+    text-align: center;
+
+    border-bottom: 1px solid rgba(0, 229, 255, .35);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(238, 80, 212, .2),
+            rgba(0, 229, 255, .13),
+            rgba(12, 207, 126, .2)
+        );
+
+    box-shadow:
+        0 0 35px rgba(0, 229, 255, .15),
+        inset 0 -1px 0 rgba(255, 255, 255, .1);
+
+    backdrop-filter: blur(16px);
+}
+
+.header-content {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.system-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 7px 14px;
+
+    color: var(--green);
+
+    border: 1px solid rgba(54, 241, 164, .3);
+    border-radius: 999px;
+
+    background: rgba(54, 241, 164, .08);
+
+    font:
+        600 10px "Orbitron",
+        sans-serif;
+
+    letter-spacing: 1px;
+}
+
+.system-status i {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 12px var(--green);
+
+    animation: pulse 1.5s infinite;
+}
+
+header h1 {
+    margin-top: 20px;
+
+    color: white;
+
+    font:
+        800 clamp(2.5rem, 8vw, 5rem)
+        "Orbitron",
+        sans-serif;
+
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 0 10px var(--cyan),
+        0 0 30px rgba(0, 229, 255, .8);
+}
+
+header p {
+    margin-top: 10px;
+
+    color: #c9f9ff;
+
+    font-size: 17px;
+}
+
+nav {
+    margin-top: 26px;
+}
+
+nav a {
+    position: relative;
+
+    display: inline-block;
+
+    margin: 6px 10px;
+    padding: 8px 3px;
+
+    color: #d5f9ff;
+    text-decoration: none;
+    font-weight: bold;
+
+    transition:
+        color .3s ease,
+        transform .3s ease;
+}
+
+nav a::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+
+    transition: width .3s ease;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--cyan);
+    transform: translateY(-3px);
+}
+
+nav a:hover::after,
+nav a.active::after {
+    width: 100%;
+}
+
+/* =================================
+   CONTEÚDO
+================================= */
+
+main {
+    position: relative;
+    z-index: 1;
+
+    width: min(100%, 1100px);
+    margin: auto;
+    padding: 30px 15px;
+}
+
+.content-section,
+.model-section {
+    position: relative;
+
+    margin: 30px auto;
+    padding: 38px 30px;
+
+    border: 1px solid rgba(0, 229, 255, .2);
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(12, 31, 54, .8),
+            rgba(7, 15, 32, .72)
+        );
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, .25),
+        inset 0 0 35px rgba(0, 229, 255, .035);
+
+    backdrop-filter: blur(15px);
+
+    transition:
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+.content-section:hover,
+.model-section:hover {
+    border-color: rgba(0, 229, 255, .45);
+
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, .35),
+        0 0 25px rgba(0, 229, 255, .08),
+        inset 0 0 35px rgba(0, 229, 255, .07);
+}
+
+.section-tag {
+    display: block;
+    margin-bottom: 12px;
+
+    color: var(--green);
+
+    font:
+        600 11px "Orbitron",
+        sans-serif;
+
+    letter-spacing: 2px;
+}
+
+section h2 {
+    margin-bottom: 18px;
+
+    color: white;
+    text-align: center;
+
+    font:
+        700 clamp(1.5rem, 4vw, 2.3rem)
+        "Orbitron",
+        sans-serif;
+
+    text-shadow:
+        0 0 14px rgba(0, 229, 255, .4);
+}
+
+section p {
+    margin: 12px 0;
+
+    color: #c9dbe5;
+    line-height: 1.8;
+}
+
+.section-description {
+    margin-bottom: 25px;
+    text-align: center;
+    color: var(--muted);
+}
+
+/* =================================
+   MODELO 3D
+================================= */
+
+.model-section {
+    min-height: 700px;
+    text-align: center;
+}
+
+.viewer-3d {
+    position: relative;
+
+    width: 100%;
+    height: 460px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    cursor: grab;
+
+    perspective: 1200px;
+
+    border: 1px solid rgba(0, 229, 255, .25);
+    border-radius: 18px;
+
+    background:
+        radial-gradient(
+            ellipse at center bottom,
+            rgba(0, 229, 255, .18),
+            transparent 55%
+        ),
+        linear-gradient(
+            to bottom,
+            #111e3b,
+            #070b18
+        );
+}
+
+.viewer-3d:active {
+    cursor: grabbing;
+}
+
+.viewer-3d::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+
+    height: 1px;
+
+    background: rgba(0, 229, 255, .5);
+    box-shadow: 0 0 20px var(--cyan);
+}
+
+.desk-3d {
+    --desk-height: 0px;
+    --rotate-x: -18deg;
+    --rotate-y: -25deg;
+
+    position: relative;
+
+    width: 440px;
+    height: 300px;
+
+    transform-style: preserve-3d;
+
+    transform:
+        translateY(var(--desk-height))
+        rotateX(var(--rotate-x))
+        rotateY(var(--rotate-y));
+
+    transition: transform .15s ease-out;
+}
+
+/* Tampo da mesa */
+
+.desk-top {
+    position: absolute;
+    top: 55px;
+    left: 50%;
+
+    width: 390px;
+    height: 145px;
+
+    transform:
+        translateX(-50%)
+        rotateX(65deg)
+        translateZ(45px);
+
+    transform-style: preserve-3d;
+}
+
+.desk-surface {
+    position: absolute;
+    inset: 0;
+
+    border: 2px solid var(--green);
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #24344a,
+            #101c2c 55%,
+            #152e3b
+        );
+
+    box-shadow:
+        0 0 15px rgba(12, 207, 126, .55),
+        inset 0 0 25px rgba(0, 229, 255, .1);
+}
+
+.desk-surface::after {
+    content: "";
+
+    position: absolute;
+    top: 14px;
+    left: 20px;
+    right: 20px;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--cyan),
+            transparent
+        );
+
+    box-shadow: 0 0 12px var(--cyan);
+}
+
+.desk-front,
+.desk-side-left,
+.desk-side-right {
+    position: absolute;
+
+    border: 1px solid rgba(0, 229, 255, .35);
+    background: #0b1723;
+}
+
+.desk-front {
+    left: 0;
+    bottom: -20px;
+
+    width: 100%;
+    height: 20px;
+
+    transform-origin: top;
+    transform: rotateX(-90deg);
+}
+
+.desk-side-left {
+    top: 0;
+    left: -20px;
+
+    width: 20px;
+    height: 145px;
+
+    transform-origin: right;
+    transform: rotateY(-90deg);
+}
+
+.desk-side-right {
+    top: 0;
+    right: -20px;
+
+    width: 20px;
+    height: 145px;
+
+    transform-origin: left;
+    transform: rotateY(90deg);
+}
+
+/* Gaveta */
+
+.desk-drawer {
+    position: absolute;
+    top: 142px;
+    left: 50%;
+
+    width: 135px;
+    height: 38px;
+
+    transform:
+        translateX(-50%)
+        translateZ(35px);
+
+    border: 1px solid var(--cyan);
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #192f43,
+            #071522
+        );
+
+    box-shadow:
+        0 0 13px rgba(0, 229, 255, .35);
+}
+
+.desk-drawer span {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+
+    width: 36px;
+    height: 4px;
+
+    transform: translateX(-50%);
+
+    border-radius: 5px;
+    background: var(--cyan);
+    box-shadow: 0 0 10px var(--cyan);
+}
+
+/* Pernas */
+
+.desk-leg {
+    position: absolute;
+    top: 158px;
+
+    width: 32px;
+    height: 150px;
+
+    border: 2px solid var(--cyan);
+    border-radius: 6px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #07101b,
+            #19374a,
+            #07101b
+        );
+
+    box-shadow:
+        inset 0 0 12px rgba(0, 229, 255, .35),
+        0 0 10px rgba(0, 229, 255, .25);
+
+    transform:
+        translateZ(5px)
+        rotateX(-4deg);
+}
+
+.leg-left {
+    left: 38px;
+}
+
+.leg-right {
+    right: 38px;
+}
+
+.leg-light {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+
+    width: 4px;
+    height: 115px;
+
+    transform: translateX(-50%);
+
+    border-radius: 5px;
+    background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+}
+
+/* Suporte */
+
+.desk-support {
+    position: absolute;
+    top: 270px;
+    left: 50%;
+
+    width: 315px;
+    height: 10px;
+
+    transform:
+        translateX(-50%)
+        translateZ(4px);
+
+    border: 1px solid var(--green);
+    border-radius: 10px;
+
+    background: #162f3b;
+    box-shadow: 0 0 10px rgba(12, 207, 126, .4);
+}
+
+/* Luminária */
+
+.desk-lamp {
+    position: absolute;
+    top: 18px;
+    right: 43px;
+
+    width: 50px;
+    height: 120px;
+
+    transform:
+        translateZ(55px)
+        rotateY(-12deg);
+}
+
+.lamp-stem {
+    position: absolute;
+    left: 22px;
+    bottom: 10px;
+
+    width: 6px;
+    height: 85px;
+
+    border-radius: 10px;
+    background: #697d8e;
+}
+
+.lamp-head {
+    position: absolute;
+    top: 0;
+    left: 2px;
+
+    width: 45px;
+    height: 24px;
+
+    transform: rotateX(35deg);
+
+    border: 2px solid var(--cyan);
+    border-radius: 50% 50% 8px 8px;
+
+    background: #273f50;
+}
+
+.lamp-light {
+    position: absolute;
+    top: 19px;
+    left: 12px;
+
+    width: 25px;
+    height: 80px;
+
+    transform: rotateX(25deg);
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255, 240, 145, .8),
+            transparent
+        );
+
+    filter: blur(7px);
+}
+
+/* Notebook */
+
+.laptop {
+    position: absolute;
+    top: 50px;
+    left: 115px;
+
+    width: 115px;
+    height: 80px;
+
+    transform:
+        translateZ(60px)
+        rotateX(3deg)
+        rotateZ(-3deg);
+
+    transform-style: preserve-3d;
+}
+
+.laptop-screen {
+    width: 115px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 3px solid #455d6e;
+    border-radius: 5px;
+
+    color: #baffed;
+
+    background:
+        radial-gradient(
+            circle,
+            #0ccf7e,
+            #082d38 65%,
+            #071522
+        );
+
+    box-shadow:
+        0 0 15px rgba(0, 229, 255, .4);
+
+    font:
+        700 9px "Orbitron",
+        sans-serif;
+}
+
+.laptop-base {
+    position: absolute;
+    left: -10px;
+    bottom: -9px;
+
+    width: 135px;
+    height: 10px;
+
+    border-radius: 3px;
+    background: #536b7a;
+    transform: rotateX(55deg);
+}
+
+/* Controles 3D */
+
+.model-controls {
+    max-width: 600px;
+    margin: 25px auto 0;
+}
+
+.model-controls label {
+    display: block;
+    margin-bottom: 10px;
+
+    color: white;
+    font-weight: bold;
+}
+
+#heightControl {
+    width: 100%;
+    accent-color: var(--green);
+}
+
+.control-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+.control-buttons button,
+.plan-button {
+    padding: 11px 16px;
+
+    color: white;
+
+    border: 1px solid var(--cyan);
+    border-radius: 6px;
+
+    background: rgba(0, 229, 255, .1);
+
+    transition: .3s ease;
+}
+
+.control-buttons button:hover,
+.plan-button:hover {
+    color: #03101b;
+    background: var(--cyan);
+    box-shadow: 0 0 18px rgba(0, 229, 255, .5);
+}
+
+/* =================================
+   RECURSOS
+================================= */
+
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+
+    list-style: none;
+}
+
+.features-list li {
+    padding: 16px;
+
+    color: #c9dbe5;
+
+    border: 1px solid rgba(0, 229, 255, .2);
+    border-radius: 10px;
+
+    background: rgba(0, 229, 255, .04);
+
+    transition: .3s ease;
+}
+
+.features-list li:hover {
+    transform: translateY(-4px);
+
+    border-color: var(--cyan);
+    background: rgba(0, 229, 255, .1);
+}
+
+.features-list span {
+    margin-right: 10px;
+
+    color: var(--cyan);
+
+    font:
+        700 12px "Orbitron",
+        sans-serif;
+}
+
+/* =================================
+   PREÇOS
+================================= */
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.price-card {
+    position: relative;
+
+    padding: 25px;
+
+    border: 1px solid rgba(0, 229, 255, .25);
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(13, 40, 61, .85),
+            rgba(7, 19, 32, .85)
+        );
+
+    transition: .3s ease;
+}
+
+.price-card:hover {
+    transform: translateY(-7px);
+
+    border-color: var(--cyan);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .3),
+        0 0 20px rgba(0, 229, 255, .15);
+}
+
+.price-card.featured {
+    border-color: var(--green);
+    box-shadow: 0 0 20px rgba(12, 207, 126, .12);
+}
+
+.plan-label {
+    color: var(--green);
+
+    font:
+        600 10px "Orbitron",
+        sans-serif;
+
+    letter-spacing: 1.5px;
+}
+
+.price-card h3 {
+    margin-top: 12px;
+    color: var(--cyan);
+}
+
+.price-card strong {
+    display: block;
+    margin: 18px 0;
+
+    color: var(--green);
+
+    font:
+        700 24px "Orbitron",
+        sans-serif;
+
+    text-shadow: 0 0 10px rgba(54, 241, 164, .5);
+}
+
+/* =================================
+   FORMULÁRIO
+================================= */
+
+form {
+    max-width: 650px;
+    margin: auto;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+
+    color: var(--muted);
+
+    font:
+        600 11px "Orbitron",
+        sans-serif;
+
+    letter-spacing: 1px;
+}
+
+form input,
+form textarea {
+    width: 100%;
+
+    padding: 13px;
+
+    color: white;
+
+    border: 1px solid rgba(0, 229, 255, .35);
+    border-radius: 7px;
+
+    outline: none;
+
+    background: rgba(1, 10, 24, .75);
+
+    resize: vertical;
+
+    transition: .3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: var(--cyan);
+
+    box-shadow:
+        0 0 15px rgba(0, 229, 255, .3);
+
+    transform: translateY(-2px);
+}
+
+form textarea {
+    min-height: 120px;
+}
+
+#characterCount {
+    display: block;
+    margin-top: 5px;
+
+    color: var(--muted);
+    text-align: right;
+}
+
+.submit-button {
+    margin-top: 20px;
+    padding: 13px 22px;
+
+    color: #03101b;
+
+    border: none;
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--cyan),
+            var(--green)
+        );
+
+    font-weight: bold;
+
+    box-shadow:
+        0 0 18px rgba(0, 229, 255, .35);
+
+    transition: .3s ease;
+}
+
+.submit-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 0 30px rgba(0, 229, 255, .65);
+}
+
+.form-success,
+.form-error {
+    margin-top: 15px;
+    padding: 12px;
+
+    border-radius: 7px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-success {
+    color: #baffdf;
+    border: 1px solid var(--green);
+    background: rgba(12, 207, 126, .15);
+}
+
+.form-error {
+    color: #ffd0d8;
+    border: 1px solid var(--error);
+    background: rgba(255, 85, 119, .15);
+}
+
+/* =================================
+   RODAPÉ
+================================= */
+
+footer {
+    position: relative;
+    z-index: 2;
+
+    padding: 30px 20px;
+
+    color: #9cb1bd;
+    text-align: center;
+
+    border-top: 1px solid rgba(0, 229, 255, .2);
+
+    background: rgba(2, 8, 20, .75);
+
+    backdrop-filter: blur(12px);
+}
+
+footer p {
+    margin: 5px;
+}
+
+/* =================================
+   ANIMAÇÕES
+================================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes pulse {
+    50% {
+        opacity: .35;
+        transform: scale(.7);
+    }
+}
+
+@keyframes scanMove {
+    from {
+        transform: translateY(-20px);
+    }
+
+    to {
+        transform: translateY(20px);
+    }
+}
+
+@keyframes gridMove {
+    from {
+        background-position: 0 0, 0 0;
+    }
+
+    to {
+        background-position: 0 55px, 55px 0;
+    }
+}
+
+/* =================================
+   RESPONSIVIDADE
+================================= */
+
+@media (max-width: 700px) {
+    header {
+        min-height: 250px;
+        padding: 35px 15px 25px;
+    }
+
+    nav a {
+        margin: 5px 6px;
+        font-size: 13px;
+    }
+
+    .content-section,
+    .model-section {
+        padding: 28px 18px;
+    }
+
+    .features-list,
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .viewer-3d {
+        height: 360px;
+    }
+
+    .desk-3d {
+        transform:
+            scale(.7)
+            translateY(var(--desk-height))
+            rotateX(var(--rotate-x))
+            rotateY(var(--rotate-y));
+    }
+
+    .control-buttons {
+        flex-direction: column;
+    }
+
+    .control-buttons button {
+        width: 100%;
+    }
+
+    .ambient-glow {
+        width: 260px;
+        height: 260px;
+    }
+}
+/* =================================
+   CONTROLE LED RGB
+================================= */
+
+.led-controls {
+    margin-top: 28px;
+    padding: 20px;
+
+    border: 1px solid rgba(0, 229, 255, .25);
+    border-radius: 12px;
+
+    background: rgba(0, 0, 0, .2);
+}
+
+.led-controls h3 {
+    margin-bottom: 15px;
+
+    color: var(--cyan);
+
+    font:
+        600 15px "Orbitron",
+        sans-serif;
+
+    text-shadow:
+        0 0 10px rgba(0, 229, 255, .6);
+}
+
+.led-color-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    margin-bottom: 18px;
+
+    color: var(--muted);
+}
+
+.led-color-picker label {
+    font-size: 14px;
+}
+
+#ledColor {
+    width: 58px;
+    height: 35px;
+
+    padding: 2px;
+
+    cursor: pointer;
+
+    border: 1px solid var(--cyan);
+    border-radius: 6px;
+
+    background: transparent;
+}
+
+/* Botões de cores */
+
+.led-presets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.led-preset {
+    width: 28px;
+    height: 28px;
+
+    padding: 0;
+
+    border: 2px solid rgba(255, 255, 255, .7);
+    border-radius: 50%;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.led-preset:hover {
+    transform: scale(1.25);
+}
+
+.led-preset.active {
+    transform: scale(1.2);
+
+    border-color: white;
+
+    box-shadow:
+        0 0 10px white,
+        0 0 25px currentColor;
+}
+
+.led-preset.cyan {
+    color: #00e5ff;
+    background: #00e5ff;
+}
+
+.led-preset.green {
+    color: #0ccf7e;
+    background: #0ccf7e;
+}
+
+.led-preset.purple {
+    color: #8a5cff;
+    background: #8a5cff;
+}
+
+.led-preset.pink {
+    color: #ee50d4;
+    background: #ee50d4;
+}
+
+.led-preset.red {
+    color: #ff416c;
+    background: #ff416c;
+}
+
+.led-preset.orange {
+    color: #ff9d00;
+    background: #ff9d00;
+}
+
+.led-preset.white {
+    color: #ffffff;
+    background: #ffffff;
+}
+
+.rainbow-button {
+    padding: 9px 12px;
+
+    color: white;
+
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: 6px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff416c,
+            #ff9d00,
+            #0ccf7e,
+            #00e5ff,
+            #8a5cff
+        );
+
+    background-size: 300% 100%;
+
+    animation: rainbowButton 4s linear infinite;
+}
+
+/* =================================
+   VARIÁVEIS RGB DA MESA
+================================= */
+
+.desk-3d {
+    --led-color: #00e5ff;
+    --led-glow: rgba(0, 229, 255, .8);
+}
+
+/* LED do tampo */
+
+.desk-surface {
+    border-color: var(--led-color);
+
+    box-shadow:
+        0 0 15px var(--led-glow),
+        0 0 35px var(--led-glow),
+        inset 0 0 25px var(--led-glow);
+}
+
+.desk-surface::after {
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--led-color),
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px var(--led-color),
+        0 0 25px var(--led-color);
+}
+
+/* LED da gaveta */
+
+.desk-drawer {
+    border-color: var(--led-color);
+
+    box-shadow:
+        0 0 13px var(--led-glow),
+        inset 0 0 15px rgba(0, 0, 0, .35);
+}
+
+.desk-drawer span {
+    background: var(--led-color);
+
+    box-shadow:
+        0 0 10px var(--led-color),
+        0 0 20px var(--led-color);
+}
+
+/* LED das pernas */
+
+.desk-leg {
+    border-color: var(--led-color);
+
+    box-shadow:
+        inset 0 0 12px var(--led-glow),
+        0 0 15px var(--led-glow);
+}
+
+.leg-light {
+    background: var(--led-color);
+
+    box-shadow:
+        0 0 12px var(--led-color),
+        0 0 28px var(--led-color);
+}
+
+/* LED do suporte */
+
+.desk-support {
+    border-color: var(--led-color);
+
+    box-shadow:
+        0 0 10px var(--led-glow),
+        0 0 20px var(--led-glow);
+}
+
+/* LED da luminária */
+
+.lamp-head {
+    border-color: var(--led-color);
+
+    box-shadow:
+        0 0 15px var(--led-glow);
+}
+
+/* =================================
+   MODO ARCO-ÍRIS
+================================= */
+
+.desk-3d.rainbow .desk-surface,
+.desk-3d.rainbow .desk-drawer,
+.desk-3d.rainbow .desk-leg,
+.desk-3d.rainbow .desk-support,
+.desk-3d.rainbow .lamp-head {
+    animation:
+        ledRainbow 4s linear infinite;
+}
+
+.desk-3d.rainbow .leg-light,
+.desk-3d.rainbow .desk-drawer span,
+.desk-3d.rainbow .desk-surface::after {
+    animation:
+        ledRainbow 4s linear infinite;
+}
+
+@keyframes ledRainbow {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+@keyframes rainbowButton {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 300% 50%;
+    }
+}

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LumiDesk - Mesa Inteligente</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Fundo futurista -->
+    <canvas id="spaceCanvas"></canvas>
+
+    <div class="ambient-glow glow-one"></div>
+    <div class="ambient-glow glow-two"></div>
+    <div class="ambient-glow glow-three"></div>
+
+    <div class="scanlines"></div>
+    <div class="cyber-grid"></div>
+
+    <!-- Cabeçalho -->
+    <header>
+
+        <div class="header-content">
+            <span class="system-status">
+                <i></i>
+                SISTEMA ONLINE
+            </span>
+
+            <h1>LumiDesk</h1>
+
+            <p>
+                A mesa inteligente que transforma seu espaço de trabalho.
+            </p>
+
+            <nav>
+                <a href="#sobre">Sobre</a>
+                <a href="#modelo3d">Modelo 3D</a>
+                <a href="#recursos">Recursos</a>
+                <a href="#preco">Preço</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </div>
+
+    </header>
+
+    <main>
+
+        <!-- Seção sobre -->
+        <section id="sobre" class="content-section reveal">
+
+            <span class="section-tag">01 / PRODUTO</span>
+
+            <h2>Conheça a LumiDesk</h2>
+
+            <p>
+                A LumiDesk é uma mesa inteligente criada para tornar sua rotina
+                mais confortável, organizada e produtiva.
+            </p>
+
+            <p>
+                Com ajustes automáticos de altura, iluminação integrada e
+                carregamento sem fio, você pode trabalhar ou estudar com mais
+                praticidade.
+            </p>
+
+        </section>
+
+        <!-- Modelo 3D -->
+        <section id="modelo3d" class="model-section reveal">
+
+            <span class="section-tag">02 / VISUALIZAÇÃO 3D</span>
+
+            <h2>Explore a LumiDesk em 3D</h2>
+
+            <p class="section-description">
+                Arraste a mesa para girar. Use o controle para ajustar a altura.
+            </p>
+
+            <div class="viewer-3d" id="viewer3D">
+
+                <div class="desk-3d" id="desk3D">
+
+                    <!-- Tampo -->
+                    <div class="desk-top">
+                        <div class="desk-surface"></div>
+                        <div class="desk-front"></div>
+                        <div class="desk-side-left"></div>
+                        <div class="desk-side-right"></div>
+                    </div>
+
+                    <!-- Gaveta -->
+                    <div class="desk-drawer">
+                        <span></span>
+                    </div>
+
+                    <!-- Pernas -->
+                    <div class="desk-leg leg-left">
+                        <div class="leg-light"></div>
+                    </div>
+
+                    <div class="desk-leg leg-right">
+                        <div class="leg-light"></div>
+                    </div>
+
+                    <!-- Suporte -->
+                    <div class="desk-support"></div>
+
+                    <!-- Luminária -->
+                    <div class="desk-lamp">
+                        <div class="lamp-stem"></div>
+                        <div class="lamp-head"></div>
+                        <div class="lamp-light"></div>
+                    </div>
+
+                    <!-- Notebook -->
+                    <div class="laptop">
+                        <div class="laptop-screen">
+                            LUMIDESK
+                        </div>
+
+                        <div class="laptop-base"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="model-controls">
+
+                <div class="led-controls">
+
+    <h3>Iluminação LED RGB</h3>
+
+    <div class="led-color-picker">
+        <label for="ledColor">
+            Escolha uma cor:
+        </label>
+
+        <input
+            type="color"
+            id="ledColor"
+            value="#00e5ff"
+        >
+    </div>
+
+    <div class="led-presets">
+        <button
+            class="led-preset cyan"
+            data-color="#00e5ff"
+            title="Azul ciano">
+        </button>
+
+        <button
+            class="led-preset green"
+            data-color="#0ccf7e"
+            title="Verde">
+        </button>
+
+        <button
+            class="led-preset purple"
+            data-color="#8a5cff"
+            title="Roxo">
+        </button>
+
+        <button
+            class="led-preset pink"
+            data-color="#ee50d4"
+            title="Rosa">
+        </button>
+
+        <button
+            class="led-preset red"
+            data-color="#ff416c"
+            title="Vermelho">
+        </button>
+
+        <button
+            class="led-preset orange"
+            data-color="#ff9d00"
+            title="Laranja">
+        </button>
+
+        <button
+            class="led-preset white"
+            data-color="#ffffff"
+            title="Branco">
+        </button>
+
+        <button
+            id="rainbowMode"
+            class="rainbow-button">
+            🌈 Arco-íris
+        </button>
+    </div>
+
+</div>
+
+
+                <label for="heightControl">
+                    Altura da mesa
+                </label>
+
+                <input
+                    type="range"
+                    id="heightControl"
+                    min="0"
+                    max="80"
+                    value="35"
+                >
+
+                <div class="control-buttons">
+                    <button id="rotateLeft">
+                        ⟲ Girar esquerda
+                    </button>
+
+                    <button id="reset3D">
+                        Resetar visão
+                    </button>
+
+                    <button id="rotateRight">
+                        Girar direita ⟳
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Recursos -->
+        <section id="recursos" class="content-section reveal">
+
+            <span class="section-tag">03 / RECURSOS</span>
+
+            <h2>Principais recursos</h2>
+
+            <ul class="features-list">
+                <li>
+                    <span>01</span>
+                    Regulagem automática de altura.
+                </li>
+
+                <li>
+                    <span>02</span>
+                    Iluminação LED ajustável.
+                </li>
+
+                <li>
+                    <span>03</span>
+                    Carregador sem fio para smartphones.
+                </li>
+
+                <li>
+                    <span>04</span>
+                    Compartimento para organizar cabos.
+                </li>
+
+                <li>
+                    <span>05</span>
+                    Controle por aplicativo de celular.
+                </li>
+            </ul>
+
+        </section>
+
+        <!-- Preços -->
+        <section id="preco" class="content-section reveal">
+
+            <span class="section-tag">04 / PLANOS</span>
+
+            <h2>Planos e preços</h2>
+
+            <div class="pricing-grid">
+
+                <article class="price-card">
+
+                    <span class="plan-label">PLANO 01</span>
+
+                    <h3>LumiDesk Essencial</h3>
+
+                    <p>
+                        Ideal para estudos e tarefas do dia a dia.
+                    </p>
+
+                    <strong>
+                        R$ 1.499,00
+                    </strong>
+
+                    <button class="plan-button">
+                        Escolher plano
+                    </button>
+
+                </article>
+
+                <article class="price-card featured">
+
+                    <span class="plan-label">MAIS POPULAR</span>
+
+                    <h3>LumiDesk Pro</h3>
+
+                    <p>
+                        Mais recursos para profissionais e criadores de conteúdo.
+                    </p>
+
+                    <strong>
+                        R$ 2.199,00
+                    </strong>
+
+                    <button class="plan-button">
+                        Escolher plano
+                    </button>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <!-- Contato -->
+        <section id="contato" class="content-section reveal">
+
+            <span class="section-tag">05 / CONTATO</span>
+
+            <h2>Receba mais informações</h2>
+
+            <form id="contactForm">
+
+                <label for="nome">
+                    Nome
+                </label>
+
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Digite seu nome"
+                    required
+                >
+
+                <label for="email">
+                    E-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
+                    required
+                >
+
+                <label for="mensagem">
+                    Mensagem
+                </label>
+
+                <textarea
+                    id="mensagem"
+                    name="mensagem"
+                    rows="5"
+                    maxlength="500"
+                    placeholder="Digite sua mensagem"
+                    required
+                ></textarea>
+
+                <small id="characterCount">
+                    0/500 caracteres
+                </small>
+
+                <button
+                    type="submit"
+                    class="submit-button">
+                    Enviar mensagem
+                </button>
+
+                <div id="formMessage"></div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            &copy; <span id="year"></span> LumiDesk.
+            Todos os direitos reservados.
+        </p>
+
+        <p>
+            Produto fictício desenvolvido para fins educacionais.
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
